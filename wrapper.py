@@ -1,7 +1,5 @@
 class Wrapper:
     deepValues = []
-    descValues =[]
+    descValues = []
     row = 0
     colum = 0
-
-    

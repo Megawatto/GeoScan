@@ -5,10 +5,7 @@ class Point:
     deep = 0
     desc = ''
 
-    def __ini__(self, x, y, value):
+    def __init__(self, x, y, value):
         self.x = x
         self.y = y
         self.value = value
-
-        
-    

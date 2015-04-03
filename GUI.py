@@ -1,5 +1,5 @@
 
 class GUI:
-    def output(self, inData):
+    def output(self, indata):
         print('OUT_GUI')
-        print(inData)
+        print(indata)

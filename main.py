@@ -1,15 +1,17 @@
-#Main class test
+# Main class test
 
 import logic
 import GUI
 import sys
 
+
 class Main:
     def start(self, url):
-        runer = logic.Runer(),GUI.GUI()
-        runer[0].parse(url)
-        runer[0].handler(runer[0].akk)
-        runer[1].output(runer[0].out)
+        runner = logic.Runner(), GUI.GUI()
+        runner[0].parse(url)
+        runner[0].handler(runner[0].akk)
+        runner[1].output(runner[0].out)
+
 
 try:
     print('start')
