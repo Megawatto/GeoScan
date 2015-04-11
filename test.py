@@ -50,12 +50,12 @@ for t in s:
                 print('>>> \%s' % (rep))
                 gp =  255 - img.get_gradient(float(rep))
                 # img.set_pix(y, x, (gp, gp, gp)) # 255 white , polojitel
-                img.set_pix_double(y,x, (gp, gp, gp))
+                img.set_pix_trouble(y,x, (gp, gp, gp))
                 print(gp)
             else:
                 # gp = 255 - img.get_gradient(math.fabs(float(rep)))
                 # img.set_pix(y, x, (gp, gp, gp))
-                img.set_pix_double(y,x, (0,0,0))
+                img.set_pix_trouble(y,x, (0,0,0))
                 # img.set_pix(y, x, (0, 0, 0)) # 0 - black , otricat
             x += 1
         except Exception:
