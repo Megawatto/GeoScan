@@ -11,7 +11,7 @@ class Runner:
             file = open(url, 'r')
             akk = ''
             for i in file:
-                akk += (i)
+                akk += file.readline()
                 print(akk)
             akk = akk.replace('\n', ',')
             self.akk = akk.split(',')

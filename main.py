@@ -16,7 +16,7 @@ class Main:
 try:
     print('start')
     m = Main()
-    m.start('test.txt')
+    m.start('3.csv')
 ##    a = sys.argv
 ##    print(a)
 ##    if (a is None):
