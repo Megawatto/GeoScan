@@ -1,6 +1,9 @@
 
 class Wrapper:
-    deepValues = []
-    descValues = []
     row = 0
     column = 0
+    trace_time = []
+
+    def __init__(self):
+        super().__init__()
+        print(id(self))
