@@ -3,7 +3,7 @@ class Point:
     y = 0
     value = 0
     deep = 0
-    desc = ''
+    time_trace = ''
 
     def __init__(self, x, y , value):
         print('create point %d' % (id(self)))
@@ -13,4 +13,7 @@ class Point:
 
     def set_param_point(self, deep, desc):
         self.deep = deep
-        self.desc = desc
+        self.time_trace = desc
+
+    def print_status(self):
+        print('<x=%d y=%d v=%d d=%d tt=%s>' % (self.x, self.y, self.value, self.deep, self.time_trace))

@@ -3,8 +3,7 @@ class Wrapper:
     column = 0
     trace_time = []
     depth_value = []
-    label =''
+    label = ''
 
     def __init__(self):
-        super().__init__()
-        print(id(self))
+        print('create wrapper' + str(id(self)))
