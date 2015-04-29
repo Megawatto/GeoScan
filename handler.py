@@ -11,6 +11,8 @@ import img
 class Handler:
     out = []
     wrappers = Wrapper()
+    rows = 0
+    column = 0
 
     def parse(self, url):
         print('parse')
@@ -54,8 +56,8 @@ class Handler:
             print(sys.exc_info())  # critical
 
     def filtering(self, data):
-        filters = Filter()
-        points = filters.appFilter_01(data)
+        filters = Filter(self.wrappers.row, self.wrappers.column)
+        points = filters.app_filter_01(data)
         self.set_final_param_point(points)
         img.create_limit(filters.limit_up, filters.limit_left, filters.limit_down, filters.limit_right)
 
@@ -65,12 +67,12 @@ class Handler:
             self.wrappers.row, self.wrappers.column, self.wrappers.trace_time, self.wrappers.depth_value))
 
     def paint(self, value, x, y):
-        # gp = img.get_new_gradient_invert(100, -500, 500, value)
-        gp = img.get_new_gradient_invert(100, -12500, 4000, value)
+        gp = img.get_new_gradient_invert(100, -5000, 5000, value)
+        # gp = img.get_new_gradient_invert(100, -12500, 4000, value)
         img.set_pix(x, y, (gp, gp, gp), 3)
 
     def set_final_param_point(self, points):
         for point in points:
             point.set_param_point(self.wrappers.depth_value[point.y], self.wrappers.trace_time[point.y])
-            print(point.print_status())
-            print('test')
+            # print(point.print_status())
+

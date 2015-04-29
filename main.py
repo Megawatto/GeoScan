@@ -16,7 +16,7 @@ class Mains:
 try:
     print('start')
     m = Mains()
-    m.starter('test.csv')
+    m.starter('2.csv')
 
 except Exception:
     print(sys.exc_info())
