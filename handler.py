@@ -1,4 +1,5 @@
 import math
+import traceback
 
 __author__ = 'Valera'
 import csv
@@ -16,16 +17,19 @@ class Handler:
 
     def parse(self, url):
         print('parse')
+        self.out = []
         try:
             row = 0
             file = open(url)
             reader = csv.reader(x.replace('\0', '').replace(' ', '') for x in file)
             for x in reader:
                 if len(x) == 0:
-                    print(x)
+                    pass
+                    # print(x)
                 else:
                     if len(x) == 1:
-                        print(x)
+                        pass
+                        # print(x)
                     else:
                         self.wrappers.depth_value.append(float(x[0]))
                         del x[0]
@@ -49,11 +53,11 @@ class Handler:
             self.wrappers.row = row
             return self.out
         except IOError:
-            print(sys.exc_info())  # file not found
+            print(traceback.print_exc())  # file not found
         except TypeError:
-            print(sys.exc_info())
+            print(traceback.print_exc())
         except Exception:
-            print(sys.exc_info())  # critical
+            print(traceback.print_exc())  # critical
 
     def filtering(self, data):
         filters = Filter(self.wrappers.row, self.wrappers.column)
