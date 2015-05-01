@@ -41,7 +41,7 @@ class Handler:
                         i = 0
                         while i < len(x):
                             x[i] = float(x[i])
-                            self.paint(x[i], i, row)
+                            # self.paint(x[i], i, row)
                             i += 1
                         row += 1
                         self.out.append(x)
@@ -80,3 +80,5 @@ class Handler:
             point.set_param_point(self.wrappers.depth_value[point.y], self.wrappers.trace_time[point.y])
             # print(point.print_status())
 
+    def get_wrappers(self):
+        return self.wrappers.row, self.wrappers.column
