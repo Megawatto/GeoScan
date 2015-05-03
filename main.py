@@ -7,6 +7,9 @@ import img
 class Mains:
     data = []
     size = 0
+    scale = 0
+    handlers = handler.Handler()
+
     def starter(self, url):
         handlers = handler.Handler()
         print(str(id(handlers)))
@@ -16,12 +19,17 @@ class Mains:
         img.show()
         # gui.output()
 
-    def parse(self, url):
+    def parse(self, url, scale):
+        self.scale = scale
         handlers = handler.Handler()
-        print(str(id(handlers)))
         self.data = handlers.parse(url)
         self.size = handlers.get_wrappers()
+        img.create_img(self.size[0], self.size[1], scale)
+        img.draw_radarogramms(self.data, scale)
+        self.handlers = handlers
 
+    def start_filter(self):
+        self.handlers.filtering(self.data)
 
 # try:
 #     print('start')

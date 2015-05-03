@@ -63,17 +63,11 @@ class Handler:
         filters = Filter(self.wrappers.row, self.wrappers.column)
         points = filters.app_filter_01(data)
         self.set_final_param_point(points)
-        img.create_limit(filters.limit_up, filters.limit_left, filters.limit_down, filters.limit_right)
-
+        # img.create_limit(filters.limit_up, filters.limit_left, filters.limit_down, filters.limit_right)
 
     def print_wrapper(self):
         print(' %s + %s + %s + %s' % (
             self.wrappers.row, self.wrappers.column, self.wrappers.trace_time, self.wrappers.depth_value))
-
-    def paint(self, value, x, y):
-        gp = img.get_new_gradient_invert(100, -5000, 5000, value)
-        # gp = img.get_new_gradient_invert(100, -12500, 4000, value)
-        img.set_pix(x, y, (gp, gp, gp), 3)
 
     def set_final_param_point(self, points):
         for point in points:
