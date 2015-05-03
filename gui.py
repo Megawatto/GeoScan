@@ -1,4 +1,5 @@
 import traceback
+from PIL import ImageTk
 from setuptools.command.easy_install import easy_install
 from img import get_new_gradient_invert, img
 from main import Mains
@@ -9,11 +10,18 @@ from tkinter import *
 
 
 root = Tk()
-root.geometry("400x400")
+root.config(bg = 'white')
 root.title('GeoScanHelper_Impl_Python_v0.1')
-button_open = Button(root, text='open file', width=10, height=2, bg='black', fg='red', font='arial 14')
-button_filter = Button(root, text='filter', width=10, height=2, bg='black', fg='red', font='arial 14')
-can = 0
+fr = Frame(root)
+fr2 = Frame(root)
+images = ImageTk.PhotoImage(file='лого.png')
+button_open = Button(fr2, text='open file', width=10, height=2, bg='grey', fg='white', font='arial 14', relief=GROOVE)
+button_filter = Button(fr2, text='filter', width=10, height=2, bg='grey', fg='white', font='arial 14', relief=GROOVE)
+button_cluster = Button(fr2, text='cluster', width=10, height=2, bg='grey', fg='white', font='arial 14', relief=GROOVE)
+can = Canvas(root, bg="white", height=images.height(), width=images.width(), cursor="pencil")
+can.create_image(0,0, anchor=NW, image=images)
+root.geometry("%dx%d" % (400, 400))
+
 
 
 def create_canvas(size):
@@ -22,14 +30,17 @@ def create_canvas(size):
         can.config(height=size[0], width=size[1])
     else:
         root.update()
-        can = Canvas(root, bg="lightblue", height=size[0], width=size[1], cursor="pencil")
-        can.create_rectangle(0, 0, size[1], size[0], outline="black")
-        # can.create_line(50,50,51,51, fill = ('#%s%s%s' % (convert(255), convert(0), convert(0))))
+        can = Canvas(root, bg="lightblue", height=500, width=500, cursor="pencil")
+        # can = Canvas(root, bg="lightblue", height=600, width=600, cursor="pencil")
+        can.create_rectangle(0, 0, 50, 50, outline="black")
+        global images
+        images = ImageTk.PhotoImage(file='лого.png')
+        can.create_image(0,0, anchor=NW, image=images)
     print(id(can))
     can.bind('<B1-Motion>', test)
     can.bind('<Button-1>', test2)
     can.bind('<ButtonRelease-1>', test3)
-    can.pack(side='top')
+    can.pack(side ='top')
 
 
 fx = 0
@@ -48,7 +59,7 @@ def convert(value):
 def logic():
     try:
         print('start')
-        m.parse('test.csv')
+        # m.parse('test.csv')
         # m.starter('4.csv')
         # m.starter('test.csv')
     except Exception:
@@ -57,10 +68,12 @@ def logic():
 
 def opens(event):
     op = askopenfilename()
-    m.parse(op)
-    create_canvas(m.size)
-    paint_pixel(m.data)
+    # m.parse(op)
+    # create_canvas(m.size)
+    create_canvas([300, 300])
+    # paint_pixel(m.data)
     print(op)
+    button_open.config(relief=RAISED)
 
 
 def paint_pixel(data):
@@ -72,7 +85,7 @@ def paint_pixel(data):
         for x in range(0, lim_x):
             # print(x)
             gp = convert(get_gp(data[y][x]))
-            can.create_line(x, y, x+1, y+1, fill=('#%s%s%s' % (gp,gp,gp)))
+            can.create_line(x, y, x + 1, y + 1, fill=('#%s%s%s' % (gp, gp, gp)))
             root.update()
             # print('work')
 
@@ -110,6 +123,10 @@ button_open.bind('<Button-1>', opens)
 # can.bind('<Button-1>', test2)
 # can.bind('<ButtonRelease-1>', test3)
 # can.pack(side='top')
-button_open.pack(side='right')
-button_filter.pack(side='right')
+fr.pack(side ='top')
+fr2.pack(side ='bottom')
+can.pack(side='top')
+button_open.pack(side = 'left')
+button_filter.pack(side = 'right')
+button_cluster.pack(side = 'right')
 root.mainloop()
