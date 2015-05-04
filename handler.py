@@ -61,9 +61,10 @@ class Handler:
 
     def filtering(self, data):
         filters = Filter(self.wrappers.row, self.wrappers.column)
-        points = filters.app_filter_01(data)
-        self.set_final_param_point(points)
-        # img.create_limit(filters.limit_up, filters.limit_left, filters.limit_down, filters.limit_right)
+        # points = filters.app_filter_01(data)
+        points = filters.app_filter_03(data)
+        img.create_limit(filters.limit_up, filters.limit_left, filters.limit_down, filters.limit_right)
+        return self.set_final_param_point(points)
 
     def print_wrapper(self):
         print(' %s + %s + %s + %s' % (
@@ -72,7 +73,12 @@ class Handler:
     def set_final_param_point(self, points):
         for point in points:
             point.set_param_point(self.wrappers.depth_value[point.y], self.wrappers.trace_time[point.y])
-            # print(point.print_status())
+            print(point.print_status())
+        print(len(points))
+        points = set(points)
+        print(len(points))
+        print('................FINISH.................')
+        return points
 
     def get_wrappers(self):
         return self.wrappers.row, self.wrappers.column

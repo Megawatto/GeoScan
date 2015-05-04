@@ -29,7 +29,9 @@ class Mains:
         self.handlers = handlers
 
     def start_filter(self):
-        self.handlers.filtering(self.data)
+        find_point = self.handlers.filtering(self.data)
+        img.draw_point(find_point, self.scale)
+        print('create_filter')
 
 # try:
 #     print('start')
