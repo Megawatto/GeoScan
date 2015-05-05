@@ -58,12 +58,13 @@ class Handler:
             print(traceback.print_exc())
         except Exception:
             print(traceback.print_exc())  # critical
-
-    def filtering(self, data):
-        filters = Filter(self.wrappers.row, self.wrappers.column)
+    #todo Времянка scale
+    def filtering(self, data, limit_box, scale):
+        filters = Filter(self.wrappers.row, self.wrappers.column, scale)
+        filters.set_limit(limit_box)
         # points = filters.app_filter_01(data)
         points = filters.app_filter_03(data)
-        img.create_limit(filters.limit_up, filters.limit_left, filters.limit_down, filters.limit_right)
+        img.create_limit(filters.limit_up, filters.limit_left, filters.limit_down, filters.limit_right, scale)
         return self.set_final_param_point(points)
 
     def print_wrapper(self):

@@ -28,11 +28,16 @@ class Mains:
         img.draw_radarogramms(self.data, scale)
         self.handlers = handlers
 
-    def start_filter(self):
-        find_point = self.handlers.filtering(self.data)
+    #todo Времянка scale потом удалить из метода фильтра
+    def start_filter(self, limit_box):
+        find_point = self.handlers.filtering(self.data, limit_box, self.scale)
         img.draw_point(find_point, self.scale)
         print('create_filter')
 
+    #todo Проработать динамичное изменение размера
+    def repain(self, scale):
+        img.create_img(self.size[0], self.size[1], scale)
+        img.draw_radarogramms(self.data, scale)
 # try:
 #     print('start')
 #     m = Mains()
