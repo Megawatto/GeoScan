@@ -3,7 +3,7 @@ import traceback
 __author__ = 'Valera'
 import csv
 import sys
-from wrapper import Wrapper
+from client_build.cl_wrapper import Wrapper
 
 
 class Handler:

@@ -4,9 +4,7 @@ __author__ = 'Valera'
 import socket
 from tkinter.filedialog import askopenfilename
 from tkinter import *
-
 from PIL import ImageTk
-
 from client_build import client_handler, client
 
 
@@ -15,7 +13,7 @@ root.config(bg='white')
 root.title('GeoScanHelper_Python_v0.13')
 fr = Frame(root)
 fr2 = Frame(root, bg='white')
-images = ImageTk.PhotoImage(file='лого.png')
+images = ImageTk.PhotoImage(file='logo.png')
 button_open = Button(fr2, text='open file', width=10, height=2, bg='#0080FF', fg='white', font='Alabama 14', relief=GROOVE)
 button_filter = Button(fr2, text='filter', width=10, height=2, bg='#0080FF', fg='white', font='Alabama 14', relief=GROOVE , state = DISABLED)
 button_cluster = Button(fr2, text='cluster', width=10, height=2, bg='#0080FF', fg='white', font='Alabama 14', relief=GROOVE, state = DISABLED)
@@ -73,7 +71,9 @@ def press_open(event=0):
         root.update()
         can.config(cursor='watch')
         data = handler.parse(op)
-        client.create_connect(data)
+        global wrappers
+        wrappers = handler.wrappers
+        client.create_connect(data, wrappers)
         # create_canvas()
         print(op)
         # button_open.config(relief=RAISED)
