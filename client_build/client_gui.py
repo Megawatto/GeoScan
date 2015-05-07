@@ -77,7 +77,7 @@ def press_open(event=0):
 
 def press_filter(event = 0):
     print('filter click')
-    client.create_connect(data, wrappers, handler.get_wrappers(), sca.get())
+    client.request_filter_data(data, wrappers, limit_box, sca.get())
     # m.start_filter(limit_box)
     repain()
 
@@ -94,9 +94,18 @@ def test(event):
     can.coords(rec, event.x, event.y, fx, fy)
     print('fx_%d fy_%d ex_%d e_y%d' % (fx, fy, event.x, event.y))
     global limit_box
-    # limit_box = [fx, event.x, fy/sca.get(), event.y/sca.get()]
-    # f = images.width() - fx, images.width() - event.x
-    limit_box = [fy, event.y, (images.width() - fx)/sca.get(), (images.width() - event.x)/sca.get()]
+    up_x = fy
+    d_x = int(event.y)
+    l_y = fx
+    r_y = int(event.x)
+    if fy > event.y:
+        up_x = int(event.y)
+        d_x = fy
+    if fx < event.x:
+        l_y = int(event.x)
+        r_y = fx
+    limit_box = [up_x, d_x, (images.width() - l_y)/sca.get(), (images.width() - r_y)/sca.get()]
+    # limit_box = [fy, event.y, (images.width() - fx)/sca.get(), (images.width() - event.x)/sca.get()]
 
 
 def test2(event):
@@ -111,7 +120,7 @@ def test2(event):
 def test3(event):
     can.delete(rec)
     print(limit_box)
-    m.start_filter(limit_box)
+    client.request_filter_data(data, wrappers, limit_box, sca.get())
     repain()
 
 

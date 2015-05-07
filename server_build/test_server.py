@@ -26,11 +26,10 @@ while True:
         except socket.timeout:
             print('>>>')
         print('data load')
-        data, wp = pickle.loads(in_data)
+        data, wp, limit_box = pickle.loads(in_data)
         impl_wp = cl_wrapper.Wrapper()
         impl_wp.row, impl_wp.column, impl_wp.depth_value, impl_wp.trace_time, impl_wp.label = wp
-        lim = [0,500,0,500]
-        response = connector.start_filter(data, lim, impl_wp)
+        response = connector.start_filter(data, limit_box, impl_wp)
         response = pickle.dumps(response)
         conn.send(response)
 
