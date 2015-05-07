@@ -21,22 +21,15 @@ sca = Scale(fr2, orient=HORIZONTAL,length=100, from_=1,to=3, resolution=1, bg ='
 can = Canvas(root, bg="white", height=images.height(), width=images.width(),  bd=0, highlightthickness=0)
 can.create_image(0, 0, anchor=NW, image=images)
 root.geometry("%dx%d" % (550, 420))
-
 handler = client_handler.Handler()
 
-def create_connect():
-    global soc
-    soc = socket.socket()
-    soc.connect(('localhost', 8080))
-    soc.send(b'MAZA_FAKA!!!!')
-    soc.close()
 
 def create_canvas():
     global can
     global images
     global limit_box
     limit_box = [0, 0, 0, 0]
-    images = ImageTk.PhotoImage(file='test.png')
+    images = ImageTk.PhotoImage(file='client_test.png')
     if (images.width() + 50) < 550:
         siz = 550
     else:
@@ -70,11 +63,12 @@ def press_open(event=0):
     if not op is None and not op == '':
         root.update()
         can.config(cursor='watch')
+        global data
         data = handler.parse(op)
         global wrappers
         wrappers = handler.wrappers
-        client.create_connect(data, wrappers)
-        # create_canvas()
+        client.create_img(data, handler.get_wrappers(), sca.get())
+        create_canvas()
         print(op)
         # button_open.config(relief=RAISED)
     else:
@@ -83,7 +77,8 @@ def press_open(event=0):
 
 def press_filter(event = 0):
     print('filter click')
-    m.start_filter(limit_box)
+    client.create_connect(data, wrappers, handler.get_wrappers(), sca.get())
+    # m.start_filter(limit_box)
     repain()
 
 def press_cluster(event = 0):
@@ -123,19 +118,9 @@ def test3(event):
 def repain():
     create_canvas()
 
-
-# button_open.bind('<Button-1>', press_open)
 button_open.config(command=press_open)
-# button_filter.bind('<Button-1>', press_filter)
 button_filter.config(command=press_filter)
-# button_cluster.bind('<Button-1>', press_cluster)
 button_cluster.config(command=press_cluster)
-# can.bind('<B1-Motion>', test)
-# can.bind('<Button-1>', test2)
-# can.bind('<ButtonRelease-1>', test3)
-# can.pack(side='top')
-
-
 sca.config(command=press_scale)
 
 fr.pack(side='top')

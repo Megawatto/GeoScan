@@ -52,3 +52,6 @@ class Handler:
             print(traceback.print_exc())
         except Exception:
             print(traceback.print_exc())  # critical
+
+    def get_wrappers(self):
+        return self.wrappers.row, self.wrappers.column
