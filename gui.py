@@ -94,9 +94,19 @@ def test(event):
     can.coords(rec, event.x, event.y, fx, fy)
     print('fx_%d fy_%d ex_%d e_y%d' % (fx, fy, event.x, event.y))
     global limit_box
-    # limit_box = [fx, event.x, fy/sca.get(), event.y/sca.get()]
-    # f = images.width() - fx, images.width() - event.x
-    limit_box = [fy, event.y, (images.width() - fx)/sca.get(), (images.width() - event.x)/sca.get()]
+    up_x = fy
+    d_x = event.y
+    l_y = fx
+    r_y = event.x
+    if fy > event.y:
+        up_x = event.y
+        d_x = fy
+    if fx < event.x:
+        l_y = event.x
+        r_y = fx
+    limit_box = [up_x, d_x, (images.width() - l_y)/sca.get(), (images.width() - r_y)/sca.get()]
+    # limit_box = [fy, event.y, (images.width() - fx)/sca.get(), (images.width() - event.x)/sca.get()]
+    print(limit_box)
 
 
 def test2(event):
