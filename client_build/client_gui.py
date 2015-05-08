@@ -10,7 +10,7 @@ from client_build import client_handler, client
 
 root = Tk()
 root.config(bg='white')
-root.title('GeoScanHelper_Python_v0.13')
+root.title('GeoScanHelper_Client_v1.03')
 fr = Frame(root)
 fr2 = Frame(root, bg='white')
 images = ImageTk.PhotoImage(file='logo.png')

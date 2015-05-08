@@ -24,8 +24,10 @@ def request_filter_data(data, wrappers, limit_box, scale):
             else:
                 data_point += buff
         soc.close()
-        data_point = pickle.loads(data_point)
+        data_point, cluster_zone = pickle.loads(data_point)
+        #fixme потом разделить клиент и графику, пока временно так сойдет
         create_find(data_point, limit_box, scale)
+        create_zona(cluster_zone, scale)
     except Exception:
         print(traceback.print_exc())
 
@@ -39,3 +41,9 @@ def create_find(find_point, limit_box, scale):
     client_build.client_img.create_limit(limit_box[0], limit_box[2], limit_box[1], limit_box[3], scale)
     client_build.client_img.draw_point(find_point, scale)
     print('create_filter')
+
+
+def create_zona(cluster_zona, scale):
+    for var in cluster_zona:
+        client_build.client_img.create_zona(var[0], var[1], var[2], var[3], scale)
+    client_build.client_img.show()

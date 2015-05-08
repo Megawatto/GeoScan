@@ -29,7 +29,8 @@ while True:
         data, wp, limit_box = pickle.loads(in_data)
         impl_wp = cl_wrapper.Wrapper()
         impl_wp.row, impl_wp.column, impl_wp.depth_value, impl_wp.trace_time, impl_wp.label = wp
-        response = connector.start_filter(data, limit_box, impl_wp)
+        response_data, response_cluster = connector.start_filter(data, limit_box, impl_wp)
+        response = [response_data, response_cluster]
         response = pickle.dumps(response)
         conn.send(response)
 
