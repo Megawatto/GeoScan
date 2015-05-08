@@ -13,6 +13,7 @@ from tkinter import *
 root = Tk()
 root.config(bg='white')
 root.title('GeoScanHelper_Python_v0.13')
+root.geometry("%dx%d" % (550, 420))
 fr = Frame(root)
 fr2 = Frame(root, bg='white')
 images = ImageTk.PhotoImage(file='лого.png')
@@ -22,7 +23,6 @@ button_cluster = Button(fr2, text='cluster', width=10, height=2, bg='#0080FF', f
 sca = Scale(fr2, orient=HORIZONTAL,length=100, from_=1,to=3, resolution=1, bg ='#0080FF', fg = "white",label = 'Scale',font='Alabama 11', relief=GROOVE)
 can = Canvas(root, bg="white", height=images.height(), width=images.width(),  bd=0, highlightthickness=0)
 can.create_image(0, 0, anchor=NW, image=images)
-root.geometry("%dx%d" % (550, 420))
 
 
 def create_canvas():
@@ -128,6 +128,12 @@ def test3(event):
 def repain():
     create_canvas()
 
+#todo дописать вывод
+def out_result():
+    global top
+    top = Toplevel(root)
+    top.title('Result')
+    lab = Label(top, text="MaZaFaKa").pack()
 
 # button_open.bind('<Button-1>', press_open)
 button_open.config(command=press_open)
